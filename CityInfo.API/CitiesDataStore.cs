@@ -5,9 +5,8 @@ namespace CityInfo.API;
 public class CitiesDataStore
 {
     public List<CityDto> Cities { get; }
-    public static CitiesDataStore Current { get; } = new CitiesDataStore();
 
-    private CitiesDataStore()
+    public CitiesDataStore()
     {
         Cities = new List<CityDto>()
         {
