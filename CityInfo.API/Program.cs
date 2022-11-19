@@ -1,6 +1,7 @@
 using CityInfo.API;
 using CityInfo.API.DbContexts;
 using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +17,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
 builder.Services.AddSingleton<CitiesDataStore>();
-builder.Services.AddDbContext<CityInfoContext>();
+builder.Services.AddDbContext<CityInfoContext>(opts =>
+{
+    opts.UseSqlServer(builder.Configuration["connection"]);
+});
 
 var app = builder.Build();
 
